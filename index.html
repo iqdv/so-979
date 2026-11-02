@@ -57,7 +57,6 @@ button:disabled{opacity:.55;cursor:default}
 .pl{font-size:11px;font-weight:800;padding:4px 6px;border-radius:99px;text-align:center}
 .pl.n{color:#8A7078}.pl.m{background:#FBE4E6;color:#A3122E}.pl.p,.pl.ok{background:#E3F1E7;color:var(--ok)}
 
-/* Inline Panel yang muncul tepat di bawah item terpilih */
 .inline-panel{background:#FFFBF7;border:1.5px solid var(--gold);border-radius:12px;padding:10px;margin:4px 0 10px;box-shadow:0 4px 14px rgba(184,147,90,.2);animation:fadeIn .15s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
 .inline-panel .ith{align-items:flex-start}
@@ -103,7 +102,7 @@ button:disabled{opacity:.55;cursor:default}
 <section id="t-master">
 <div class="card"><input id="q" type="search" placeholder="Cari PLU atau nama item">
 <div class="bar"><button class="sm" id="all">Pilih semua</button><button class="sm" id="none">Kosongkan</button><span class="mu">Dipilih <b id="cnt">0</b></span></div><div class="bar" id="rng"></div><div id="ml"></div></div>
-<div class="card"><b>Mulai KKSO</b><div class="g" style="margin-top:8px"><label class="f">Tanggal<input type="date" id="mdt"></label><label class="f">Shift<select id="msh"><option>1</option><option>2</option><option>3</option></select></label><label class="f">Petugas<input id="mpt"></label></div><div class="bar"><button class="btn" id="mk">Buat KKSO</button></div></div>
+<div class="card"><b>Mulai KKSO</b><div class="g" style="margin-top:8px"><label class="f">Tanggal<input type="date" id="mdt"></label><label class="f">Shift<select id="msh"><option>1</option><option>2</option><option>3</option></select></label><label class="f">Petugas<input id="mpt"></label></div><div class="bar"><button class="btn" id="mk">Buat KKSO Baru</button></div></div>
 </section>
 
 <section id="t-kkso" hidden><div id="kb"></div></section>
@@ -228,10 +227,12 @@ function enterApp(){
 $("#saveurl").onclick=()=>{const u=$("#url").value.trim();if(!/^https:\/\/script\.google\.com\/.+\/exec$/.test(u))return toast("URL harus berakhiran /exec");S.api=u;persist();showLogin()};
 $("#l-chg").onclick=()=>{S.api="";persist();showLogin()};
 $("#l-go").onclick=async()=>{
- const u=$("#l-u").value.trim().toLowerCase(),p=$("#l-p").value;
- if(!u||!p)return toast("Isi username dan kata sandi.");
+ const u=$("#l-u$.value.trim().toLowerCase(),p=$("#l-p").value; // Safe binding below
+ const usernameVal=$("#l-u").value.trim().toLowerCase();
+ const passwordVal=$("#l-p").value;
+ if(!usernameVal||!passwordVal)return toast("Isi username dan kata sandi.");
  const b=$("#l-go");b.disabled=true;
- try{const r=await call(setupMode?"setup":"login",{username:u,password:p,name:$("#l-nm").value.trim()});
+ try{const r=await call(setupMode?"setup":"login",{username:usernameVal,password:passwordVal,name:$("#l-nm").value.trim()});
   S.token=r.token;S.user=r.user;
   $("#l-p").value="";persist();enterApp()}
  catch(e){toast(e.message)}
@@ -256,9 +257,19 @@ $("#q").oninput=e=>{q=e.target.value;rM()};
 $("#ml").addEventListener("change",e=>{const p=e.target.dataset.plu;if(!p)return;S.checked=e.target.checked?[...new Set([...S.checked,p])]:S.checked.filter(x=>x!==p);persist();$("#cnt").textContent=S.checked.length;rRng()});
 $("#all").onclick=()=>{S.checked=S.master.map(m=>m.plu);persist();rM()};
 $("#none").onclick=()=>{S.checked=[];persist();rM()};
-$("#mk").onclick=()=>{const it=S.master.filter(m=>S.checked.includes(m.plu));if(!it.length)return toast("Centang minimal satu item.");
+
+$("#mk").onclick=()=>{
+ const it=S.master.filter(m=>S.checked.includes(m.plu));
+ if(!it.length)return toast("Centang minimal satu item.");
+ 
+ const existingActive=S.sessions.find(s=>!s.saved && s.owner===S.user.username);
+ if(existingActive){
+  if(!confirm("Sudah ada KKSO aktif/draft sebelumnya. Buat KKSO baru? (KKSO sebelumnya akan tetap tersimpan sebagai draft).")) return;
+ }
+
  const s={id:"S"+Date.now(),date:$("#mdt").value||today(),shift:$("#msh").value,petugas:$("#mpt").value.trim()||S.user.name,owner:S.user.username,ownerName:S.user.name,saved:false,base:{},log:[],items:it.map(m=>({plu:m.plu,name:m.name,sys:"",cnt:[]}))};
- S.sessions.unshift(s);S.cur=s.id;persist();show("kkso")};
+ S.sessions.unshift(s);S.cur=s.id;persist();show("kkso")
+};
 
 let sel=0,fil="all";
 const stOf=it=>{const d=dif(it);if(d===null||!it.cnt.length)return["n","Belum"];return d<0?["m","Minus "+(-d)]:d>0?["p","Plus "+d]:["ok","Klop"]};
@@ -275,20 +286,33 @@ const trow=(it,i)=>{
  return html;
 };
 
-function rK(){const s=cur(),b=$("#kb");
+function rK(){
+ const b=$("#kb");
  if(!b)return;
- if(!s){b.innerHTML='<div class="card mu">Belum ada SO aktif. Centang item di tab Master, lalu tekan Buat KKSO.</div>';return}
+
+ // Jika tidak ada S.cur yang dipilih atau session tidak ditemukan, tampilkan daftar pilihan KKSO aktif / draft
+ const s=cur();
+ if(!s){
+  const userSessions=S.sessions.filter(x=>!x.saved && x.owner===S.user.username);
+  b.innerHTML=`<div class="card"><b>Daftar KKSO & Draft Anda</b><p class="mu">Pilih KKSO yang ingin dilanjutkan atau dihapus:</p>
+  <div>${userSessions.map(sess=>`<div class="row" style="justify-content:space-between"><div><b>${esc(sess.date)}, Shift ${esc(sess.shift)}</b><div class="mu">${sess.items.length} item</div></div><div style="display:flex;gap:6px"><button class="sm" data-select-sess="${esc(sess.id)}">Lanjutkan</button><button class="x" data-del-sess="${esc(sess.id)}" title="Hapus">✕</button></div></div>`).join("")||'<p class="mu">Belum ada KKSO aktif/draft. Silakan buat di tab Master.</p>'}</div></div>`;
+  return;
+ }
+
  const ro=!!(s.owner&&s.owner!==S.user.username&&!isAdmin());if(sel>=s.items.length)sel=0;
  const c={all:s.items.length,n:0,m:0,p:0};s.items.forEach(it=>{const k=stOf(it)[0];if(c[k]!==undefined)c[k]++});
  const f=(k,l)=>`<button class="fc${fil===k?" on":""}" data-f="${k}">${l} ${c[k]}</button>`;
  const rows=s.items.map((it,i)=>[it,i]).filter(x=>fil==="all"||stOf(x[0])[0]===fil).map(x=>trow(x[0],x[1])).join("")||'<p class="mu" style="padding:12px">Tidak ada item.</p>';
- b.innerHTML=(ro?`<div class="card mu">SO ini milik ${esc(s.ownerName||s.owner)}. Anda hanya bisa melihatnya.</div>`:"")+`<fieldset ${ro?"disabled":""}>`
+ 
+ b.innerHTML=`<div class="bar" style="margin-bottom:8px"><button class="sm" data-back-list>← Pilih / Ganti KKSO Lain</button></div>`
+ +(ro?`<div class="card mu">SO ini milik ${esc(s.ownerName||s.owner)}. Anda hanya bisa melihatnya.</div>`:"")+`<fieldset ${ro?"disabled":""}>`
  +`<div class="card"><div class="g"><label class="f">Tanggal<input type="date" id="kd" value="${esc(s.date)}"></label><label class="f">Shift<select id="ks">${[1,2,3].map(n=>`<option ${s.shift==n?"selected":""}>${n}</option>`).join("")}</select></label><label class="f">Petugas<input id="kp" value="${esc(s.petugas)}"></label></div>
 <div class="bar"><span class="badge ${s.saved?"ok":""}">${s.saved?"Tersimpan":"Draft"}</span><button class="btn" id="ksave">${s.saved?"Simpan perubahan":"Simpan SO"}</button><button class="sm" id="kwa">Bagikan ke WhatsApp</button><button class="sm" id="kcopy">Salin laporan</button></div></div>`
  +`<div class="fcs">${f("all","Semua")}${f("n","Belum")}${f("m","Minus")}${f("p","Plus")}</div><div class="th"><span>ITEM</span><span>SISTEM</span><span>FISIK SO</span><span>SELISIH</span></div><div class="tb">${rows}</div>`
  +`<div class="card"><b>Tambah item lain</b><div class="g" style="margin-top:8px"><label class="f">PLU<input id="kpl" inputmode="numeric"></label><label class="f">Nama (jika PLU tidak ada di master)<input id="knm"></label></div><div class="bar"><button class="sm" id="kadd">Tambah ke SO</button></div></div>`
  +(s.log.length?`<div class="card"><b>Perubahan setelah disimpan</b>${s.log.slice().reverse().map(l=>`<div class="log"><span class="mu">${esc(l.t)}${l.by?", oleh "+esc(l.by):""}</span><br>${esc(l.name)}: ${l.from===null?"baru":l.from} → <b>${l.to}</b></div>`).join("")}</div>`:"")
- +`</fieldset>`;}
+ +`</fieldset>`;
+}
 
 const kb=$("#kb");
 function addCnt(n){const s=cur();if(!s||!s.items[sel])return;s.items[sel].cnt.push(String(n));persist();rK();const x=$("#count-add");if(x)x.focus({preventScroll:true})}
@@ -304,7 +328,22 @@ kb.addEventListener("input",e=>{const s=cur(),t=e.target;if(!s)return;
 });
 kb.addEventListener("keydown",e=>{if(e.key!=="Enter")return;if(e.target.id==="count-add"){e.preventDefault();submitCount();nextItem();return}const r=e.target.closest(".tr");if(!r)return;e.preventDefault();const n=r.nextElementSibling;if(n){const x=n.querySelector("[data-sys]");if(x){x.focus();n.scrollIntoView({block:"center",behavior:"smooth"})}}});
 
-kb.addEventListener("click",e=>{const s=cur(),t=e.target;if(!s)return;
+kb.addEventListener("click",e=>{
+ const selBtn=e.target.closest("[data-select-sess]");
+ if(selBtn){S.cur=selBtn.dataset.selectSess;persist();rK();return;}
+ const delBtn=e.target.closest("[data-del-sess]");
+ if(delBtn){
+  const id=delBtn.dataset.delSess;
+  if(confirm("Hapus draft KKSO ini?")){
+   S.sessions=S.sessions.filter(x=>x.id!==id);
+   if(S.cur===id)S.cur=null;
+   persist();rK();toast("Draft KKSO dihapus");
+  }
+  return;
+ }
+ if(e.target.closest("[data-back-list]")){S.cur=null;rK();return;}
+
+ const s=cur(),t=e.target;if(!s)return;
  const row=t.closest(".tr");
  if(row&&!t.closest("[data-sys]")&&!t.closest(".ch")){
   const i=+row.dataset.i;
