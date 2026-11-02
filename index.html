@@ -7,7 +7,7 @@
 :root{--bg:#FAF6F1;--card:#fff;--tx:#2B1118;--mu:#6B5258;--bd:#E5D3C0;--pr:#7A1830;--pr2:#F3E6D6;--ok:#1D6B3A;--gold:#B8935A;color-scheme:light}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 "Manrope","Segoe UI",system-ui,sans-serif;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
-main{max-width:720px;margin:0 auto;padding:14px}
+main{max-width:720px;margin:0 auto;padding:14px;padding-bottom:80px}
 header{display:flex;justify-content:space-between;align-items:center;background:#4A0F20;color:#F6EBDD;margin:-14px -14px 12px;padding:calc(16px + env(safe-area-inset-top,0px)) 18px 16px;border-radius:0 0 24px 24px}
 h1{font:700 27px/1 "Cormorant Garamond",Georgia,serif;margin:0}h1 i{font-style:normal;color:#D8B77E}
 .hr{display:flex;align-items:center;gap:8px}
@@ -44,6 +44,7 @@ button:disabled{opacity:.55;cursor:default}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:10px}
 .stat{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:10px}
 .stat b{display:block;font-size:22px;color:var(--pr)}.stat span{font-size:12px;color:var(--mu)}
+
 .tr{display:grid;grid-template-columns:1fr 54px 80px 66px;gap:6px;align-items:center;padding:7px 10px;border-bottom:1px solid var(--pr2);background:#fff}
 .tr.on{background:var(--pr2);box-shadow:inset 0 0 0 1.5px var(--gold)}
 .tr input{padding:7px 4px;text-align:center;font-weight:700;border-radius:10px}.tr .fs{border-color:#D9C4AE;font-weight:800;font-size:16px}
@@ -55,16 +56,19 @@ button:disabled{opacity:.55;cursor:default}
 .tb{background:#fff;border:1px solid var(--bd);border-radius:14px;overflow:hidden;margin-bottom:10px}
 .pl{font-size:11px;font-weight:800;padding:4px 6px;border-radius:99px;text-align:center}
 .pl.n{color:#8A7078}.pl.m{background:#FBE4E6;color:#A3122E}.pl.p,.pl.ok{background:#E3F1E7;color:var(--ok)}
-.fcs{display:flex;gap:6px;overflow-x:auto;margin-bottom:8px}.fc{padding:7px 13px;border-radius:99px;border:1px solid var(--bd);background:#fff;font-weight:800;color:var(--pr);white-space:nowrap}.fc.on{background:#4A0F20;border-color:#4A0F20;color:#F6EBDD}
 
-#kb{padding-bottom:160px}
-.pn{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(692px,calc(100% - 20px));z-index:7;background:#fff;border:1px solid var(--bd);border-top:2px solid var(--gold);border-radius:16px 16px 0 0;padding:10px 12px calc(12px + env(safe-area-inset-bottom,0px));box-shadow:0 -6px 20px rgba(74,15,32,.15)}
-.pn .ith{align-items:flex-start}.pn .item-info{min-width:0;flex:1}.pn .item-info>b{display:block;font-size:13px}.pn .item-info .mu{font-size:12px;margin-top:2px}
+/* Inline Panel yang muncul tepat di bawah item terpilih */
+.inline-panel{background:#FFFBF7;border:1.5px solid var(--gold);border-radius:12px;padding:10px;margin:4px 0 10px;box-shadow:0 4px 14px rgba(184,147,90,.2);animation:fadeIn .15s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.inline-panel .ith{align-items:flex-start}
+.inline-panel .item-info{min-width:0;flex:1}
+.inline-panel .item-info>b{display:block;font-size:13px}
+.inline-panel .item-info .mu{font-size:11.5px;margin-top:2px}
 .countline{display:flex;gap:6px;align-items:center;margin-top:8px}
-.countline input{height:46px;text-align:center;font-size:20px;font-weight:800;flex:1}
-.countline .btn{height:46px;padding:0 16px;white-space:nowrap;font-size:15px}
+.countline input{height:42px;text-align:center;font-size:18px;font-weight:800;flex:1}
+.countline .btn{height:42px;padding:0 14px;white-space:nowrap;font-size:14px}
 .pn-actions{display:flex;gap:6px;margin-top:6px}
-.pn-actions button{flex:1;padding:7px;font-size:13px;font-weight:700}
+.pn-actions button{flex:1;padding:6px;font-size:12px;font-weight:700}
 
 .ov{position:fixed;inset:0;background:rgba(43,17,24,.58);display:flex;align-items:flex-end;justify-content:center;z-index:8}
 .sheet{background:var(--bg);width:100%;max-width:480px;border-radius:24px 24px 0 0;padding:14px 16px calc(18px + env(safe-area-inset-bottom,0px));max-height:92vh;overflow:auto}
@@ -72,7 +76,7 @@ button:disabled{opacity:.55;cursor:default}
 .kp{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}.kp button{height:52px;border-radius:14px;border:0;background:#fff;font-size:20px;font-weight:700;box-shadow:0 1px 0 var(--bd)}.kp .o{background:var(--pr2)}
 .rep{white-space:pre-wrap;background:var(--pr2);border-radius:10px;padding:10px;font:13px/1.5 "Manrope","Segoe UI",system-ui,sans-serif;max-height:340px;overflow:auto;margin:8px 0}
 .lg{font-size:13px;padding:6px 0;border-bottom:1px dashed var(--bd)}
-#toast{position:fixed;left:50%;bottom:calc(180px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tx);color:#fff;padding:10px 16px;border-radius:99px;opacity:0;transition:.25s;pointer-events:none;max-width:92vw;text-align:center;z-index:9}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tx);color:#fff;padding:10px 16px;border-radius:99px;opacity:0;transition:.25s;pointer-events:none;max-width:92vw;text-align:center;z-index:9}
 #toast.on{opacity:1}
 [hidden]{display:none!important}
 </style></head><body><main>
@@ -259,10 +263,17 @@ $("#mk").onclick=()=>{const it=S.master.filter(m=>S.checked.includes(m.plu));if(
 let sel=0,fil="all";
 const stOf=it=>{const d=dif(it);if(d===null||!it.cnt.length)return["n","Belum"];return d<0?["m","Minus "+(-d)]:d>0?["p","Plus "+d]:["ok","Klop"]};
 const chs=it=>it.cnt.map((n,j)=>(j?"+":"")+`<span class="ch" data-x="${j}">${esc(n)} ×</span>`).join("");
-const trow=(it,i)=>{const[k,t]=stOf(it);return `<div class="tr${i===sel?" on":""}" data-i="${i}"><div class="nmc"><b>${esc(it.name)}</b><small>${i+1} · ${esc(it.plu)}</small><div class="chs">${chs(it)}</div></div><input type="number" inputmode="numeric" data-sys value="${esc(it.sys)}" aria-label="Stok sistem"><input class="fs" type="text" data-fis value="${esc(tot(it))}" placeholder="0" aria-label="Total fisik" readonly tabindex="-1"><span class="pl ${k}">${t}</span></div>`};
 
-function panel(s){const it=s.items[sel];if(!it)return"";
- return `<div class="pn"><div class="ith"><div class="item-info"><b>${esc(it.name)} · ${esc(it.plu)}</b><div class="mu">Hitungan sementara: <b>${it.cnt.join(" + ")||"Belum ada"}</b> = <b>${tot(it)}</b> unit</div></div><div style="white-space:nowrap"><button class="sm" data-mv="-1" aria-label="Pindah ke atas">↑</button> <button class="sm" data-mv="1" aria-label="Pindah ke bawah">↓</button></div></div><div class="countline"><input id="count-add" type="text" inputmode="decimal" autocomplete="off" placeholder="Jumlah fisik..."><button class="btn" data-add-count>Tambah</button><button class="btn" data-next-item style="background:#4A0F20">Lanjut ❯</button></div><div class="pn-actions"><button class="sm" data-undo>↺ Urungkan</button><button class="sm gd" data-calc>🔢 Kalkulator</button></div></div>`}
+function inlinePanel(it){
+ return `<div class="inline-panel"><div class="ith"><div class="item-info"><b>${esc(it.name)} · ${esc(it.plu)}</b><div class="mu">Hitungan sementara: <b>${it.cnt.join(" + ")||"Belum ada"}</b> = <b>${tot(it)}</b> unit</div></div><div style="white-space:nowrap"><button class="sm" data-mv="-1" title="Ke atas">↑</button> <button class="sm" data-mv="1" title="Ke bawah">↓</button></div></div><div class="countline"><input id="count-add" type="text" inputmode="decimal" autocomplete="off" placeholder="Jumlah fisik..."><button class="btn" data-add-count>Tambah</button><button class="btn" data-next-item style="background:#4A0F20">Lanjut ❯</button></div><div class="pn-actions"><button class="sm" data-undo>↺ Urungkan</button><button class="sm gd" data-calc>🔢 Kalkulator</button></div></div>`;
+}
+
+const trow=(it,i)=>{
+ const[k,t]=stOf(it);
+ let html=`<div class="tr${i===sel?" on":""}" data-i="${i}"><div class="nmc"><b>${esc(it.name)}</b><small>${i+1} · ${esc(it.plu)}</small><div class="chs">${chs(it)}</div></div><input type="number" inputmode="numeric" data-sys value="${esc(it.sys)}" aria-label="Stok sistem"><input class="fs" type="text" data-fis value="${esc(tot(it))}" placeholder="0" aria-label="Total fisik" readonly tabindex="-1"><span class="pl ${k}">${t}</span></div>`;
+ if(i===sel){html+=inlinePanel(it);}
+ return html;
+};
 
 function rK(){const s=cur(),b=$("#kb");
  if(!b)return;
@@ -277,36 +288,34 @@ function rK(){const s=cur(),b=$("#kb");
  +`<div class="fcs">${f("all","Semua")}${f("n","Belum")}${f("m","Minus")}${f("p","Plus")}</div><div class="th"><span>ITEM</span><span>SISTEM</span><span>FISIK SO</span><span>SELISIH</span></div><div class="tb">${rows}</div>`
  +`<div class="card"><b>Tambah item lain</b><div class="g" style="margin-top:8px"><label class="f">PLU<input id="kpl" inputmode="numeric"></label><label class="f">Nama (jika PLU tidak ada di master)<input id="knm"></label></div><div class="bar"><button class="sm" id="kadd">Tambah ke SO</button></div></div>`
  +(s.log.length?`<div class="card"><b>Perubahan setelah disimpan</b>${s.log.slice().reverse().map(l=>`<div class="log"><span class="mu">${esc(l.t)}${l.by?", oleh "+esc(l.by):""}</span><br>${esc(l.name)}: ${l.from===null?"baru":l.from} → <b>${l.to}</b></div>`).join("")}</div>`:"")
- +`<div id="pnw">${panel(s)}</div></fieldset>`}
+ +`</fieldset>`;}
 
 const kb=$("#kb");
-function sync(i){const s=cur(),it=s.items[i],r=kb.querySelector(`.tr[data-i="${i}"]`);if(!r)return;const[k,t]=stOf(it),p=r.querySelector(".pl");p.className="pl "+k;p.textContent=t;r.querySelector(".chs").innerHTML=chs(it);r.querySelector("[data-fis]").value=tot(it);$("#pnw").innerHTML=panel(s)}
-function rowRe(i,keepCountFocus=false){const s=cur(),r=kb.querySelector(`.tr[data-i="${i}"]`);if(r)r.outerHTML=trow(s.items[i],i);$("#pnw").innerHTML=panel(s);if(keepCountFocus){const x=$("#count-add");if(x){x.focus({preventScroll:true})}}}
-function addCnt(n){const s=cur();if(!s||!s.items[sel])return;s.items[sel].cnt.push(String(n));persist();rowRe(sel,true)}
+function addCnt(n){const s=cur();if(!s||!s.items[sel])return;s.items[sel].cnt.push(String(n));persist();rK();const x=$("#count-add");if(x)x.focus({preventScroll:true})}
 function submitCount(){const x=$("#count-add");if(!x)return;const raw=x.value.trim().replace(",",".");if(!raw||!/^\d+(\.\d+)?$/.test(raw)||!isFinite(Number(raw)))return toast("Masukkan jumlah yang valid.");addCnt(Number(raw));}
-function nextItem(){const s=cur();if(!s)return;if(sel<s.items.length-1){sel++;}else{sel=0;}kb.querySelectorAll(".tr.on").forEach(x=>x.classList.remove("on"));const nextRow=kb.querySelector(`.tr[data-i="${sel}"]`);if(nextRow){nextRow.classList.add("on");nextRow.scrollIntoView({block:"center",behavior:"smooth"});}$("#pnw").innerHTML=panel(s);const x=$("#count-add");if(x)x.focus({preventScroll:true});}
+function nextItem(){const s=cur();if(!s)return;if(sel<s.items.length-1){sel++;}else{sel=0;}rK();const nextRow=kb.querySelector(`.tr[data-i="${sel}"]`);if(nextRow){nextRow.scrollIntoView({block:"center",behavior:"smooth"});}const x=$("#count-add");if(x)x.focus({preventScroll:true});}
 
-kb.addEventListener("focusin",e=>{const r=e.target.closest(".tr");if(!r||+r.dataset.i===sel)return;sel=+r.dataset.i;kb.querySelectorAll(".tr.on").forEach(x=>x.classList.remove("on"));r.classList.add("on");$("#pnw").innerHTML=panel(cur())});
+kb.addEventListener("focusin",e=>{const r=e.target.closest(".tr");if(!r||+r.dataset.i===sel)return;sel=+r.dataset.i;rK();const x=$("#count-add");if(x)x.focus({preventScroll:true});});
 kb.addEventListener("input",e=>{const s=cur(),t=e.target;if(!s)return;
  if(t.id==="kd")s.date=t.value;else if(t.id==="ks")s.shift=t.value;else if(t.id==="kp")s.petugas=t.value;
  else{const r=t.closest(".tr");if(!r)return;const i=+r.dataset.i,it=s.items[i];
   if("sys" in t.dataset)it.sys=t.value;
-  sync(i)}
- persist()});
+  persist()}
+});
 kb.addEventListener("keydown",e=>{if(e.key!=="Enter")return;if(e.target.id==="count-add"){e.preventDefault();submitCount();nextItem();return}const r=e.target.closest(".tr");if(!r)return;e.preventDefault();const n=r.nextElementSibling;if(n){const x=n.querySelector("[data-sys]");if(x){x.focus();n.scrollIntoView({block:"center",behavior:"smooth"})}}});
+
 kb.addEventListener("click",e=>{const s=cur(),t=e.target;if(!s)return;
  const row=t.closest(".tr");
  if(row&&!t.closest("[data-sys]")&&!t.closest(".ch")){
   const i=+row.dataset.i;
   if(Number.isInteger(i)&&s.items[i]){
-   if(sel!==i){sel=i;kb.querySelectorAll(".tr.on").forEach(x=>x.classList.remove("on"));row.classList.add("on");$("#pnw").innerHTML=panel(s)}
-   const countInput=$("#count-add");if(countInput){e.preventDefault();countInput.focus({preventScroll:true});return}
+   if(sel!==i){sel=i;rK();const countInput=$("#count-add");if(countInput){e.preventDefault();countInput.focus({preventScroll:true});return}}
   }
  }
- const ch=t.closest(".ch");if(ch){const i=+ch.closest(".tr").dataset.i;s.items[i].cnt.splice(+ch.dataset.x,1);persist();rowRe(i);return}
+ const ch=t.closest(".ch");if(ch){const i=+ch.closest(".tr").dataset.i;s.items[i].cnt.splice(+ch.dataset.x,1);persist();rK();return}
  if(t.closest("[data-add-count]")){submitCount();return}
  if(t.closest("[data-next-item]")){nextItem();return}
- if(t.closest("[data-undo]")){if(s.items[sel]){s.items[sel].cnt.pop();persist();rowRe(sel)}return}
+ if(t.closest("[data-undo]")){if(s.items[sel]){s.items[sel].cnt.pop();persist();rK();const x=$("#count-add");if(x)x.focus({preventScroll:true})}return}
  if(t.closest("[data-calc]")){openCalc();return}
  const mv=t.closest("[data-mv]");if(mv){const j=sel+(+mv.dataset.mv);if(j<0||j>=s.items.length)return;[s.items[sel],s.items[j]]=[s.items[j],s.items[sel]];sel=j;persist();rK();return}
  const fc=t.closest("[data-f]");if(fc){fil=fc.dataset.f;rK();return}
