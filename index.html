@@ -227,7 +227,6 @@ function enterApp(){
 $("#saveurl").onclick=()=>{const u=$("#url").value.trim();if(!/^https:\/\/script\.google\.com\/.+\/exec$/.test(u))return toast("URL harus berakhiran /exec");S.api=u;persist();showLogin()};
 $("#l-chg").onclick=()=>{S.api="";persist();showLogin()};
 $("#l-go").onclick=async()=>{
- const u=$("#l-u$.value.trim().toLowerCase(),p=$("#l-p").value; // Safe binding below
  const usernameVal=$("#l-u").value.trim().toLowerCase();
  const passwordVal=$("#l-p").value;
  if(!usernameVal||!passwordVal)return toast("Isi username dan kata sandi.");
@@ -290,7 +289,6 @@ function rK(){
  const b=$("#kb");
  if(!b)return;
 
- // Jika tidak ada S.cur yang dipilih atau session tidak ditemukan, tampilkan daftar pilihan KKSO aktif / draft
  const s=cur();
  if(!s){
   const userSessions=S.sessions.filter(x=>!x.saved && x.owner===S.user.username);
