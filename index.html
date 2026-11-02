@@ -37,17 +37,6 @@ button:disabled{opacity:.55;cursor:default}
 .plu{color:var(--mu);width:64px;flex:none}.nm{flex:1;min-width:0}
 .edr{padding:10px 0;border-bottom:1px solid var(--pr2)}
 .ith{display:flex;justify-content:space-between;gap:8px}
-.prev{margin:6px 0;padding:6px 9px;border-radius:9px;background:var(--pr2);font-size:13px}
-.prev.m{border-left:3px solid var(--pr)}
-.top{display:flex;gap:8px;align-items:end;margin:8px 0}
-.top label{width:96px}
-.plus{font-size:22px;line-height:1;padding:9px 16px;height:44px;flex:none}
-.cin{font-size:20px;font-weight:600;text-align:center}
-.tot{min-width:70px;text-align:right}.tot b{font-size:26px;color:var(--pr)}
-.sel{display:block;font-size:12px;font-weight:600}.sel.m{color:var(--pr)}.sel.z,.sel.p{color:var(--ok)}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center}
-.chips input{width:62px;text-align:center;padding:6px;border-radius:999px;background:var(--pr2);border-color:transparent;font-weight:600}
-.chips span{color:var(--mu)}
 .log{font-size:13px;padding:5px 0;border-bottom:1px dashed var(--bd)}
 .badge{font-size:11px;padding:2px 8px;border-radius:99px;background:var(--pr2);color:var(--pr);font-weight:600;white-space:nowrap}
 .badge.ok{background:#e4f6ea;color:var(--ok)}
@@ -67,22 +56,23 @@ button:disabled{opacity:.55;cursor:default}
 .pl{font-size:11px;font-weight:800;padding:4px 6px;border-radius:99px;text-align:center}
 .pl.n{color:#8A7078}.pl.m{background:#FBE4E6;color:#A3122E}.pl.p,.pl.ok{background:#E3F1E7;color:var(--ok)}
 .fcs{display:flex;gap:6px;overflow-x:auto;margin-bottom:8px}.fc{padding:7px 13px;border-radius:99px;border:1px solid var(--bd);background:#fff;font-weight:800;color:var(--pr);white-space:nowrap}.fc.on{background:#4A0F20;border-color:#4A0F20;color:#F6EBDD}
-#kb{padding-bottom:235px}
-.pn{position:fixed;left:50%;transform:translateX(-50%);bottom:var(--keyboard-lift,0px);width:min(692px,calc(100% - 28px));z-index:7;background:#fff;border:1px solid var(--bd);border-top:2px solid var(--gold);border-radius:18px 18px 0 0;padding:10px 12px calc(12px + env(safe-area-inset-bottom,0px));box-shadow:0 -8px 24px rgba(74,15,32,.18);transition:bottom .12s ease}
-.pn .ith{align-items:flex-start}.pn .item-info{min-width:0;flex:1}.pn .item-info>b{display:block;font-size:13px}.pn .item-info .mu{font-size:12px;margin-top:2px}
-.countline{display:flex;gap:7px;align-items:end;margin-top:9px}.countline label{flex:1;min-width:0}.countline input{height:42px;text-align:center;font-size:18px;font-weight:800}.countline .btn{height:42px;white-space:nowrap}
-.pn .qs{display:flex;gap:6px;flex-wrap:nowrap;margin-top:8px}.pn .qs .sm{flex:1;min-width:0;padding:7px 5px;font-size:12px;white-space:nowrap;text-align:center}
-@media(max-width:430px){#kb{padding-bottom:245px}.pn{width:calc(100% - 16px);padding:9px 9px calc(10px + env(safe-area-inset-bottom,0px))}.pn .qs{gap:4px}.pn .qs .sm{font-size:11px;padding:7px 2px}.countline input{font-size:17px}}
 
-.qs{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.qs .sm{flex:1;font-weight:800}.gd{border-color:var(--gold)}
-.sm.on{background:#4A0F20;color:#F6EBDD;border-color:#4A0F20}
+#kb{padding-bottom:160px}
+.pn{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(692px,calc(100% - 20px));z-index:7;background:#fff;border:1px solid var(--bd);border-top:2px solid var(--gold);border-radius:16px 16px 0 0;padding:10px 12px calc(12px + env(safe-area-inset-bottom,0px));box-shadow:0 -6px 20px rgba(74,15,32,.15)}
+.pn .ith{align-items:flex-start}.pn .item-info{min-width:0;flex:1}.pn .item-info>b{display:block;font-size:13px}.pn .item-info .mu{font-size:12px;margin-top:2px}
+.countline{display:flex;gap:6px;align-items:center;margin-top:8px}
+.countline input{height:46px;text-align:center;font-size:20px;font-weight:800;flex:1}
+.countline .btn{height:46px;padding:0 16px;white-space:nowrap;font-size:15px}
+.pn-actions{display:flex;gap:6px;margin-top:6px}
+.pn-actions button{flex:1;padding:7px;font-size:13px;font-weight:700}
+
 .ov{position:fixed;inset:0;background:rgba(43,17,24,.58);display:flex;align-items:flex-end;justify-content:center;z-index:8}
 .sheet{background:var(--bg);width:100%;max-width:480px;border-radius:24px 24px 0 0;padding:14px 16px calc(18px + env(safe-area-inset-bottom,0px));max-height:92vh;overflow:auto}
 .cd{background:#4A0F20;color:#F6EBDD;border-radius:16px;padding:10px 16px;text-align:right;margin:8px 0}.cd small{color:#D8B77E;font-weight:700}.cd div{font:700 44px/1 "Cormorant Garamond",Georgia,serif}
 .kp{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}.kp button{height:52px;border-radius:14px;border:0;background:#fff;font-size:20px;font-weight:700;box-shadow:0 1px 0 var(--bd)}.kp .o{background:var(--pr2)}
 .rep{white-space:pre-wrap;background:var(--pr2);border-radius:10px;padding:10px;font:13px/1.5 "Manrope","Segoe UI",system-ui,sans-serif;max-height:340px;overflow:auto;margin:8px 0}
 .lg{font-size:13px;padding:6px 0;border-bottom:1px dashed var(--bd)}
-#toast{position:fixed;left:50%;bottom:calc(240px + var(--keyboard-lift,0px) + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tx);color:#fff;padding:10px 16px;border-radius:99px;opacity:0;transition:.25s;pointer-events:none;max-width:92vw;text-align:center;z-index:9}
+#toast{position:fixed;left:50%;bottom:calc(180px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tx);color:#fff;padding:10px 16px;border-radius:99px;opacity:0;transition:.25s;pointer-events:none;max-width:92vw;text-align:center;z-index:9}
 #toast.on{opacity:1}
 [hidden]{display:none!important}
 </style></head><body><main>
@@ -186,14 +176,13 @@ if(DEFAULT_API)S.api=DEFAULT_API;
 
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify({api:S.api,token:S.token,user:S.user,master:S.master,checked:S.checked,cur:S.cur,sessions:S.sessions.filter(s=>!s.saved||s.id===S.cur)}))}catch(e){}};
+const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify({api:S.api,token:S.token,user:S.user,master:S.master,checked:S.checked,cur:S.cur,sessions:S.sessions}))}catch(e){}};
 const today=()=>{const d=new Date();return new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,10)};
 const cur=()=>S.sessions.find(s=>s.id===S.cur);
 const tot=it=>it.cnt.reduce((a,n)=>a+(+n||0),0);
 const toast=t=>{const e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("on"),2800)};
 const setSt=t=>$("#st").textContent=t;
 const dif=it=>it.sys===""?null:tot(it)-(+it.sys);
-const dtxt=d=>d<0?"minus "+Math.abs(d):d>0?"plus "+d:"sesuai";
 const isAdmin=()=>!!S.user&&S.user.role==="admin";
 const byDate=(a,b)=>(b.date+b.shift).localeCompare(a.date+a.shift);
 
@@ -207,8 +196,10 @@ async function pull(){
  setSt("Memuat…");
  try{const r=await call("load");
   S.user=r.me;S.master=r.master;
-  const drafts=S.sessions.filter(s=>!s.saved&&s.owner===S.user.username);
-  S.sessions=[...r.sessions,...drafts.filter(d=>!r.sessions.some(x=>x.id===d.id))];
+  const localDrafts=S.sessions.filter(s=>!s.saved);
+  const merged=[...r.sessions];
+  localDrafts.forEach(d=>{if(!merged.some(m=>m.id===d.id))merged.push(d)});
+  S.sessions=merged;
   S.checked=S.checked.filter(p=>S.master.some(m=>m.plu===p));
   if(S.cur&&!S.sessions.some(s=>s.id===S.cur))S.cur=null;
   persist();setSt("Tersinkron ✓");render()}
@@ -238,7 +229,6 @@ $("#l-go").onclick=async()=>{
  const b=$("#l-go");b.disabled=true;
  try{const r=await call(setupMode?"setup":"login",{username:u,password:p,name:$("#l-nm").value.trim()});
   S.token=r.token;S.user=r.user;
-  S.sessions=S.sessions.filter(s=>s.owner===r.user.username);
   $("#l-p").value="";persist();enterApp()}
  catch(e){toast(e.message)}
  finally{b.disabled=false}};
@@ -270,9 +260,12 @@ let sel=0,fil="all";
 const stOf=it=>{const d=dif(it);if(d===null||!it.cnt.length)return["n","Belum"];return d<0?["m","Minus "+(-d)]:d>0?["p","Plus "+d]:["ok","Klop"]};
 const chs=it=>it.cnt.map((n,j)=>(j?"+":"")+`<span class="ch" data-x="${j}">${esc(n)} ×</span>`).join("");
 const trow=(it,i)=>{const[k,t]=stOf(it);return `<div class="tr${i===sel?" on":""}" data-i="${i}"><div class="nmc"><b>${esc(it.name)}</b><small>${i+1} · ${esc(it.plu)}</small><div class="chs">${chs(it)}</div></div><input type="number" inputmode="numeric" data-sys value="${esc(it.sys)}" aria-label="Stok sistem"><input class="fs" type="text" data-fis value="${esc(tot(it))}" placeholder="0" aria-label="Total fisik" readonly tabindex="-1"><span class="pl ${k}">${t}</span></div>`};
+
 function panel(s){const it=s.items[sel];if(!it)return"";
- return `<div class="pn"><div class="ith"><div class="item-info"><b>${esc(it.name)} · ${esc(it.plu)}</b><div class="mu">Hitungan sementara: <b>${it.cnt.join(" + ")||"Belum ada"}</b> = <b>${tot(it)}</b> unit</div></div><div style="white-space:nowrap"><button class="sm" data-mv="-1" aria-label="Pindah ke atas">↑</button> <button class="sm" data-mv="1" aria-label="Pindah ke bawah">↓</button></div></div><div class="countline"><label class="f">Tambah hitungan (tekan Enter)<input id="count-add" type="text" inputmode="decimal" autocomplete="off" placeholder="Contoh: 4"></label><button class="btn" data-add-count>Tambah</button><button class="btn" data-next-item style="background:#4A0F20">Lanjut ❯</button></div><div class="qs">${[1,5,10,12,24].map(n=>`<button class="sm" data-q="${n}">+${n}</button>`).join("")}<button class="sm" data-undo title="Urungkan">↺</button><button class="sm gd" data-calc title="Kalkulator">🔢</button></div></div>`}
+ return `<div class="pn"><div class="ith"><div class="item-info"><b>${esc(it.name)} · ${esc(it.plu)}</b><div class="mu">Hitungan sementara: <b>${it.cnt.join(" + ")||"Belum ada"}</b> = <b>${tot(it)}</b> unit</div></div><div style="white-space:nowrap"><button class="sm" data-mv="-1" aria-label="Pindah ke atas">↑</button> <button class="sm" data-mv="1" aria-label="Pindah ke bawah">↓</button></div></div><div class="countline"><input id="count-add" type="text" inputmode="decimal" autocomplete="off" placeholder="Jumlah fisik..."><button class="btn" data-add-count>Tambah</button><button class="btn" data-next-item style="background:#4A0F20">Lanjut ❯</button></div><div class="pn-actions"><button class="sm" data-undo>↺ Urungkan</button><button class="sm gd" data-calc>🔢 Kalkulator</button></div></div>`}
+
 function rK(){const s=cur(),b=$("#kb");
+ if(!b)return;
  if(!s){b.innerHTML='<div class="card mu">Belum ada SO aktif. Centang item di tab Master, lalu tekan Buat KKSO.</div>';return}
  const ro=!!(s.owner&&s.owner!==S.user.username&&!isAdmin());if(sel>=s.items.length)sel=0;
  const c={all:s.items.length,n:0,m:0,p:0};s.items.forEach(it=>{const k=stOf(it)[0];if(c[k]!==undefined)c[k]++});
@@ -285,14 +278,14 @@ function rK(){const s=cur(),b=$("#kb");
  +`<div class="card"><b>Tambah item lain</b><div class="g" style="margin-top:8px"><label class="f">PLU<input id="kpl" inputmode="numeric"></label><label class="f">Nama (jika PLU tidak ada di master)<input id="knm"></label></div><div class="bar"><button class="sm" id="kadd">Tambah ke SO</button></div></div>`
  +(s.log.length?`<div class="card"><b>Perubahan setelah disimpan</b>${s.log.slice().reverse().map(l=>`<div class="log"><span class="mu">${esc(l.t)}${l.by?", oleh "+esc(l.by):""}</span><br>${esc(l.name)}: ${l.from===null?"baru":l.from} → <b>${l.to}</b></div>`).join("")}</div>`:"")
  +`<div id="pnw">${panel(s)}</div></fieldset>`}
+
 const kb=$("#kb");
-function adjustQuickPanel(){const vv=window.visualViewport;let lift=0;if(vv){lift=Math.max(0,window.innerHeight-vv.height-vv.offsetTop)}document.documentElement.style.setProperty("--keyboard-lift",lift+"px")}
-if(window.visualViewport){window.visualViewport.addEventListener("resize",adjustQuickPanel);window.visualViewport.addEventListener("scroll",adjustQuickPanel)}window.addEventListener("resize",adjustQuickPanel);adjustQuickPanel();
 function sync(i){const s=cur(),it=s.items[i],r=kb.querySelector(`.tr[data-i="${i}"]`);if(!r)return;const[k,t]=stOf(it),p=r.querySelector(".pl");p.className="pl "+k;p.textContent=t;r.querySelector(".chs").innerHTML=chs(it);r.querySelector("[data-fis]").value=tot(it);$("#pnw").innerHTML=panel(s)}
 function rowRe(i,keepCountFocus=false){const s=cur(),r=kb.querySelector(`.tr[data-i="${i}"]`);if(r)r.outerHTML=trow(s.items[i],i);$("#pnw").innerHTML=panel(s);if(keepCountFocus){const x=$("#count-add");if(x){x.focus({preventScroll:true})}}}
 function addCnt(n){const s=cur();if(!s||!s.items[sel])return;s.items[sel].cnt.push(String(n));persist();rowRe(sel,true)}
 function submitCount(){const x=$("#count-add");if(!x)return;const raw=x.value.trim().replace(",",".");if(!raw||!/^\d+(\.\d+)?$/.test(raw)||!isFinite(Number(raw)))return toast("Masukkan jumlah yang valid.");addCnt(Number(raw));}
 function nextItem(){const s=cur();if(!s)return;if(sel<s.items.length-1){sel++;}else{sel=0;}kb.querySelectorAll(".tr.on").forEach(x=>x.classList.remove("on"));const nextRow=kb.querySelector(`.tr[data-i="${sel}"]`);if(nextRow){nextRow.classList.add("on");nextRow.scrollIntoView({block:"center",behavior:"smooth"});}$("#pnw").innerHTML=panel(s);const x=$("#count-add");if(x)x.focus({preventScroll:true});}
+
 kb.addEventListener("focusin",e=>{const r=e.target.closest(".tr");if(!r||+r.dataset.i===sel)return;sel=+r.dataset.i;kb.querySelectorAll(".tr.on").forEach(x=>x.classList.remove("on"));r.classList.add("on");$("#pnw").innerHTML=panel(cur())});
 kb.addEventListener("input",e=>{const s=cur(),t=e.target;if(!s)return;
  if(t.id==="kd")s.date=t.value;else if(t.id==="ks")s.shift=t.value;else if(t.id==="kp")s.petugas=t.value;
@@ -311,7 +304,6 @@ kb.addEventListener("click",e=>{const s=cur(),t=e.target;if(!s)return;
   }
  }
  const ch=t.closest(".ch");if(ch){const i=+ch.closest(".tr").dataset.i;s.items[i].cnt.splice(+ch.dataset.x,1);persist();rowRe(i);return}
- const q=t.closest("[data-q]");if(q){addCnt(+q.dataset.q);return}
  if(t.closest("[data-add-count]")){submitCount();return}
  if(t.closest("[data-next-item]")){nextItem();return}
  if(t.closest("[data-undo]")){if(s.items[sel]){s.items[sel].cnt.pop();persist();rowRe(sel)}return}
@@ -324,6 +316,7 @@ kb.addEventListener("click",e=>{const s=cur(),t=e.target;if(!s)return;
  else if(t.id==="ksave")saveSO(s,t);
  else if(t.id==="kwa"){if(!s.saved)return toast("Simpan SO dulu sebelum dibagikan.");share(report(s.date,[s]))}
  else if(t.id==="kcopy")copyT(report(s.date,[s]))});
+
 let ex="";
 const ev=()=>{try{const v=ex.replace(/,/g,".");if(!v||!/^[0-9+\-*/. ]+$/.test(v))return null;const r=Function('"use strict";return ('+v+')')();return isFinite(r)?Math.round(r*1000)/1000:null}catch(e){return null}};
 function cshow(){const r=ev();$("#cx").innerHTML=esc(ex.replace(/\*/g,"×").replace(/\//g,"÷").replace(/-/g,"−"))||"&nbsp;";$("#cr").textContent=r===null?"0":r}
@@ -336,6 +329,7 @@ $("#cuse").onclick=()=>{const r=ev();if(r===null||r<0)return toast("Hasil tidak 
 $("#cclose").onclick=()=>$("#cm").hidden=true;
 function showSum(s){const t=report(s.date,[s]);$("#smt").textContent=t;$("#sm").hidden=false;$("#smcp").onclick=()=>copyT(t);$("#smwa").onclick=()=>share(t)}
 $("#smx").onclick=()=>$("#sm").hidden=true;
+
 async function saveSO(s,btn){
  const c=JSON.parse(JSON.stringify(s)),now=new Date().toLocaleString("id-ID");
  c.items.forEach(i=>{const b=c.base[i.plu],T=tot(i);if(c.saved&&b!==T)c.log.push({t:now,plu:i.plu,name:i.name,from:b===undefined?null:b,to:T,by:S.user.name})});
@@ -376,16 +370,27 @@ $("#rd").onchange=rRep;
 $("#rwa").onclick=()=>share(rRep.t);
 $("#rcp").onclick=()=>copyT(rRep.t);
 
-function rR(){rRep();const l=S.sessions.slice().sort(byDate);
- $("#rb").innerHTML=l.map(s=>{const m=s.items.filter(i=>dif(i)!==null&&dif(i)<0).length;
+function rR(){
+ rRep();
+ const l=S.sessions.slice().sort(byDate);
+ const rb=$("#rb");
+ if(!rb)return;
+ rb.innerHTML=l.map(s=>{
+  const m=s.items.filter(i=>dif(i)!==null&&dif(i)<0).length;
   const canDel=isAdmin()||(!s.saved&&s.owner===S.user.username);
-  return `<div class="card ith"><div><b>${esc(s.date)}, Shift ${esc(s.shift)}</b> <span class="badge ${s.saved?"ok":""}">${s.saved?"Tersimpan":"Draft"}</span><div class="mu">${s.items.length} item${s.ownerName||s.petugas?", "+esc(s.ownerName||s.petugas):""}${m?`, ${m} minus`:""}${s.log.length?`, ${s.log.length} perubahan`:""}</div></div><div><button class="sm" data-o="${esc(s.id)}">Buka</button>${canDel?`<button class="x" data-d="${esc(s.id)}" title="Hapus">✕</button>`:""}</div></div>`}).join("")||'<div class="card mu">Belum ada riwayat SO.</div>'}
+  return `<div class="card ith"><div><b>${esc(s.date)}, Shift ${esc(s.shift)}</b> <span class="badge ${s.saved?"ok":""}">${s.saved?"Tersimpan":"Draft"}</span><div class="mu">${s.items.length} item${s.ownerName||s.petugas?", "+esc(s.ownerName||s.petugas):""}${m?`, ${m} minus`:""}</div></div><div><button class="sm" data-o="${esc(s.id)}">Buka</button>${canDel?`<button class="x" data-d="${esc(s.id)}" title="Hapus">✕</button>`:""}</div></div>`
+ }).join("")||'<div class="card mu">Belum ada riwayat SO.</div>';
+}
+
 $("#rb").addEventListener("click",e=>{const d=e.target.dataset;
  if(d.o){S.cur=d.o;persist();show("kkso")}
  else if(d.d)delSO(d.d)});
-async function delSO(id){const s=S.sessions.find(x=>x.id===id);if(!s||!confirm("Hapus KKSO ini beserta laporannya?"))return;
+
+async function delSO(id){
+ const s=S.sessions.find(x=>x.id===id);if(!s||!confirm("Hapus KKSO ini beserta laporannya?"))return;
  if(s.saved){try{await call("session_delete",{id})}catch(e){return toast("Gagal menghapus: "+e.message)}}
- S.sessions=S.sessions.filter(x=>x.id!==id);if(S.cur===id)S.cur=null;persist();render();toast("KKSO dihapus")}
+ S.sessions=S.sessions.filter(x=>x.id!==id);if(S.cur===id)S.cur=null;persist();render();toast("KKSO dihapus");
+}
 
 function rAk(){$("#me").innerHTML=`<b>${esc(S.user.name)}</b><div class="mu">@${esc(S.user.username)}</div><span class="badge ${isAdmin()?"":"gr"}">${isAdmin()?"Admin":"Petugas"}</span>`}
 $("#pwgo").onclick=async()=>{const a=$("#pw0").value,b=$("#pw1").value,c=$("#pw2").value;
